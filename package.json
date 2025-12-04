@@ -1,0 +1,15 @@
+{
+  "name": "com.billiotgames.uimanager",
+  "version": "0.0.1",
+  "displayName": "UI Manager",
+  "description": "For Managing UI",
+  "unity": "6000.2",
+  "author": {
+    "name": "Billot Games",
+    "url": "https://github.com/Sanghun2/UI-Manager.git"
+  },
+  "keywords": [
+    "UI",
+    "Manager"
+  ]
+}
