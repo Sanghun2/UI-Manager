@@ -22,7 +22,7 @@ namespace BilliotGames
             }
         }
 
-        private void Reset() {
+        protected virtual void Reset() {
             if (targetButton == null) {
                 targetButton = GetComponentInChildren<Button>();
             }
