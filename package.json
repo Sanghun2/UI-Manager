@@ -1,6 +1,6 @@
-{
+﻿{
     "name": "com.billiotgames.uimanager",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "displayName": "UI Manager",
     "description": "UGUI를 UIBase 기반으로 관리하는 Manager입니다.",
     "unity": "6000.2",
