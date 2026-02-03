@@ -9,7 +9,7 @@ namespace BilliotGames
     {
         [SerializeField] Button targetButton;
 
-        public void SetCustomButtonAction(UnityAction buttonAction) {
+        public void SetButtonAction(UnityAction buttonAction) {
             targetButton.onClick.RemoveAllListeners();
             targetButton.onClick.AddListener(buttonAction);
         }
@@ -17,8 +17,14 @@ namespace BilliotGames
 
         protected override void Start() {
             if (targetButton != null && !_isInit) {
-                SetCustomButtonAction(ButtonAction);
+                SetButtonAction(ButtonAction);
                 _isInit = true;
+            }
+        }
+
+        private void Reset() {
+            if (targetButton == null) {
+                targetButton = GetComponentInChildren<Button>();
             }
         }
     }
