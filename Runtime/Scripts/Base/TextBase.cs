@@ -14,7 +14,8 @@ namespace BilliotGames
         protected virtual void Reset() {
             if (targetText == null) {
                 targetText = GetComponentInChildren<TextMeshProUGUI>();
-            }
+            } 
+
         }
     }
 }
