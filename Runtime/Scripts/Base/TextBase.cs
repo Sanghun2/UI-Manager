@@ -3,7 +3,7 @@ using TMPro;
 
 namespace BilliotGames
 {
-    public class TextBase : UIBase
+    public abstract class TextBase : UIBase
     {
         [SerializeField] TextMeshProUGUI targetText;
 
