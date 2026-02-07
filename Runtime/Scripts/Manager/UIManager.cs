@@ -95,7 +95,7 @@ namespace BilliotGames
             }
         }
         public void CloseUI<T>(T targetUI) where T : UIBase {
-            targetUI?.CloseUI();
+            if (targetUI != null && targetUI.IsOpened) targetUI.CloseUI();
             if (!TryRemoveUIFromStack(targetUI)) {
                 Debug.LogWarning($"<color=yellow>close 하려는 ui({typeof(T)})가 stack에 존재하지 않음. 의도한 작업이 아니라면 OpenUI로 먼저 UI open 필요</color>");
             }
