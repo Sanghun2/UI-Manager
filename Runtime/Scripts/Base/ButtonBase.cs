@@ -18,9 +18,9 @@ namespace BilliotGames
             _isInit = true;
         }
 
-        public void SetButtonAction(UnityAction buttonAction) {
+        public void SetButtonAction(Action buttonAction) {
             targetButton.onClick.RemoveAllListeners();
-            targetButton.onClick.AddListener(buttonAction);
+            targetButton.onClick.AddListener(() => buttonAction?.Invoke());
         }
         protected abstract void ButtonAction();
 
