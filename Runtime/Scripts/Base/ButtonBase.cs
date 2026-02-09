@@ -9,18 +9,20 @@ namespace BilliotGames
     {
         [SerializeField] Button targetButton;
 
+        public override void InitUI() {
+            if (IsInit) return;
+            base.InitUI();
+            if (targetButton != null) {
+                SetButtonAction(ButtonAction);
+            }
+            _isInit = true;
+        }
+
         public void SetButtonAction(UnityAction buttonAction) {
             targetButton.onClick.RemoveAllListeners();
             targetButton.onClick.AddListener(buttonAction);
         }
         protected abstract void ButtonAction();
-
-        protected override void Start() {
-            if (targetButton != null && !_isInit) {
-                SetButtonAction(ButtonAction);
-                _isInit = true;
-            }
-        }
 
         protected virtual void Reset() {
             if (targetButton == null) {
