@@ -7,7 +7,7 @@ namespace BilliotGames
 {
     public abstract class ButtonBase : UIBase
     {
-        [SerializeField] Button targetButton;
+        [SerializeField] protected Button targetButton;
 
         public override void InitUI() {
             if (IsInit) return;
