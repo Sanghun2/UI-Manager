@@ -43,6 +43,7 @@ namespace BilliotGames
 
             return targetUI;
         }
+
         public T GetUI<T>(string prefabPath, Transform parent) where T : UIBase {
             if (TryFindUI<T>(out T resultUI)) {
                 return resultUI;
@@ -79,10 +80,10 @@ namespace BilliotGames
         public T OpenUI<T>() where T : UIBase {
             return OpenUI(GetUI<T>());
         }
-        public T OpenUI<T>(string prefabPath, Transform parent) where T : UIBase {
+        public T OpenOrLoadUI<T>(string prefabPath, Transform parent) where T : UIBase {
             return OpenUI(GetUI<T>(prefabPath, parent));
         }
-        public T OpenUI<T>(GameObject uiPrefab, Transform parent) where T : UIBase {
+        public T OpenOrLoadUI<T>(GameObject uiPrefab, Transform parent) where T : UIBase {
             return OpenUI(GetUI<T>(uiPrefab, parent));
         }
 
