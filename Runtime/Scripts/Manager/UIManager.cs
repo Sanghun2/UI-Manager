@@ -75,6 +75,17 @@ namespace BilliotGames
             Debug.LogError($"{typeof(T)}에 해당하는 UI를 찾을 수 없음");
             return null;
         }
+        public bool TryGetOpenedUI<T>(out T ui) where T : class {
+            foreach (var openedUI in uiDict.Values) {
+                if (openedUI is T matched) {
+                    ui = matched;
+                    return true;
+                }
+            }
+
+            ui = null;
+            return false;
+        }
 
 
         public T OpenUI<T>() where T : UIBase {
