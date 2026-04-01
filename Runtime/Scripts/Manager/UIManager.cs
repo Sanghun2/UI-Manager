@@ -20,6 +20,9 @@ namespace BilliotGames
         private Dictionary<Type, UIBase> uiDict = new Dictionary<Type, UIBase>();
         private Stack<UIBase> _openedUIStack = new Stack<UIBase>();
 
+        public event Action<UIBase> OnUIOpened;
+        public event Action<UIBase> OnUIClosed;
+
         public void ClearUIs() {
             CloseAllUIs();
             uiDict.Clear();
@@ -39,6 +42,7 @@ namespace BilliotGames
                 if (!targetUI.IsInit) targetUI.InitUI();
                 targetUI.OpenUI();
                 _openedUIStack.Push(targetUI);
+                OnUIOpened?.Invoke(targetUI);
             }
 
             return targetUI;
@@ -108,10 +112,15 @@ namespace BilliotGames
                     //Debug.LogError($"<color=red>close 하려는 ui({typeof(T)})가 stack에 존재하지 않음. OpenUI로 먼저 UI를 열어야 함</color>");
                     ui.CloseUI();
                 }
+
+                OnUIClosed?.Invoke(ui);
             }
         }
         public void CloseUI<T>(T targetUI) where T : UIBase {
-            if (targetUI != null && targetUI.IsOpened) targetUI.CloseUI();
+            if (targetUI != null && targetUI.IsOpened) {
+                targetUI.CloseUI();
+                OnUIClosed?.Invoke(targetUI);
+            }
             if (!TryRemoveUIFromStack(targetUI)) {
                 Debug.LogWarning($"<color=yellow>close 하려는 ui({typeof(T)})가 stack에 존재하지 않음. 의도한 작업이 아니라면 OpenUI로 먼저 UI open 필요</color>");
             }
@@ -122,6 +131,7 @@ namespace BilliotGames
             if (_openedUIStack.Count > 0) {
                 var targetUI = _openedUIStack.Pop();
                 targetUI?.CloseUI();
+                OnUIClosed?.Invoke(targetUI);
             }
         }
         public void CloseAllUIs() {
