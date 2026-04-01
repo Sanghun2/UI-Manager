@@ -76,7 +76,7 @@ namespace BilliotGames
             return null;
         }
         public bool TryGetOpenedUI<T>(out T ui) where T : class {
-            foreach (var openedUI in uiDict.Values) {
+            foreach (var openedUI in _openedUIStack) {
                 if (openedUI is T matched) {
                     ui = matched;
                     return true;
