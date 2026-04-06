@@ -79,6 +79,13 @@ namespace BilliotGames
             Debug.LogError($"{typeof(T)}에 해당하는 UI를 찾을 수 없음");
             return null;
         }
+        public UIBase GetUI(Type uiType) {
+            if (uiDict.TryGetValue(uiType, out var findUI)) {
+                return findUI;
+            }
+
+            return GameObject.FindAnyObjectByType(uiType, FindObjectsInactive.Include) as UIBase;
+        }
         public bool TryGetOpenedUI<T>(out T ui) where T : class {
             foreach (var openedUI in _openedUIStack) {
                 if (openedUI is T matched) {
@@ -94,6 +101,15 @@ namespace BilliotGames
 
         public T OpenUI<T>() where T : UIBase {
             return OpenUI(GetUI<T>());
+        }
+        public UIBase OpenUI(Type uiType) {
+            var uiBase = GetUI(uiType);
+            if (uiBase == null) { Debug.LogError($"<color=red>({uiType}) is not type of UIBase</color>"); return null; }
+
+            uiBase.InitUI();
+            _openedUIStack.Push(uiBase);
+            uiBase.OpenUI();
+            return uiBase;  
         }
         public T OpenOrLoadUI<T>(string prefabPath, Transform parent) where T : UIBase {
             return OpenUI(GetUI<T>(prefabPath, parent));
